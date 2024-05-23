@@ -1,16 +1,17 @@
 #include "current_display.h"
+#include "weather_data.h"
 #include <iostream>
 using namespace std;
 
-CurrentConditionDisplay::CurrentConditionDisplay(Subject* initialWeatherData) {
-    weatherData = initialWeatherData;
-    weatherData->registerObserver(this);
+CurrentConditionDisplay::CurrentConditionDisplay(WeatherData* subject) {
+    observable = subject;
+    observable->registerObserver(this);
 }
 
-void CurrentConditionDisplay::update(int temperature, int humidity, int pressure) {
-    this->temperature = temperature;
-    this->humidity = humidity;
-    display();
+void CurrentConditionDisplay::update() {
+  temperature = observable->getTemperature();
+  humidity = observable->getHumidity();
+  display();
 }
 
 void CurrentConditionDisplay::display() {

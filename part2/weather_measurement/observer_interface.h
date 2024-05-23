@@ -3,7 +3,7 @@
 
 class Observer {
 public:
-  virtual void update(int temp, int humidity, int pressure) = 0; 
+  virtual void update() = 0; 
 };
 
 class Displayment {

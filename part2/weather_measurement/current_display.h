@@ -3,15 +3,16 @@
 
 #include "observer_interface.h"
 #include "subject.h"
+#include "weather_data.h"
 
 class CurrentConditionDisplay : public Observer, Displayment {
 private:
   int temperature;
   int humidity;
-  Subject* weatherData;
+  WeatherData* observable;
 public:
-  CurrentConditionDisplay(Subject* initialWeatherData);
-  void update(int temperature, int humidity, int pressure) override ;
+  CurrentConditionDisplay(WeatherData* subject);
+  void update() override ;
   void display() override ;
   double calculateHeatIndex(double temperature, double humidity);
 };

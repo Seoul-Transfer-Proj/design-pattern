@@ -3,29 +3,25 @@
 
 #include "observer_interface.h"
 #include "subject.h"
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "weather_object.h"
 
 class WeatherData : public Subject {
 private:
-  vector<Observer*> observers;
-  int temperature;
-  int humidity;
-  int pressure;
+  WeatherObject weatherObj;
 public:
-  WeatherData() {
-    observers = vector<Observer*>();
-  }
-  //옵저버 배열의 끝에 Observer 객체를 추가한다. 
-  void registerObserver(Observer* o) override { observers.push_back(o); };
+  WeatherData() {}
 
-  void removeObserver(Observer* o) override ;
-
-  void notifyObservers() override ;
-
-  void measurementsChanged();
+  void measurementsChanged() {
+    //기상청에서 기상 관련 데이터 측정에 업데이트가 생겼을 때 옵저버에게 알려준다.
+    setChanged();
+    notifyObservers();
+  };
   void setMeasurements(int temperature, int humidity, int pressure);
+
+  // 옵저버에서 필요할 때 데이터를 끌어다 씀(Pull)
+  int getTemperature() { return weatherObj.temperature; }
+  int getHumidity() { return weatherObj.humidity; }
+  int getPressure() { return weatherObj.pressure; }
 };
 
 #endif

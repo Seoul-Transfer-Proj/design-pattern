@@ -1,13 +1,21 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
-#include "observer_interface.h"
 
+#include "observer_interface.h"
+#include "weather_object.h"
+#include <vector>
+using namespace std;
 
 class Subject {
-    public:
-    virtual void registerObserver(Observer* o) = 0;
-    virtual void removeObserver(Observer* o) = 0;
-    virtual void notifyObservers() = 0;
+private:
+  vector<Observer*> observers;
+  bool changed;
+public:
+  Subject();
+  void registerObserver(Observer* o);
+  void removeObserver(Observer* o);
+  void notifyObservers();
+  void setChanged() { changed = true; }
 };
 
 #endif
