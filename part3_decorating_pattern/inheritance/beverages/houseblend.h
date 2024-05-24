@@ -2,31 +2,18 @@
 #define HOUSEBLEND_H
 
 #include "beverage.h"
+#include "../condiment/beverage_size.h"
+#include "../const/size.h"
 
 class HouseBlend : public Beverage {
-
 public:
   HouseBlend() { description = "하우스 블렌드 커피"; }
 
-  string getDescription() override { 
-    string orderedSize = getStringFromSize(getSize());
-    return orderedSize + " 크기의" + description ; 
-  }
+  string getDescription() override { return description; }
 
   double cost () override {
-    switch (getSize())
-    {
-    case Size::TALL:
-      return 3000;
-      break;
-    case Size::VENTI:
-      return 4000;
-    case Size::GRANDE:
-      return 4500;
-    default:
-      return 3000;
-      break;
-    }
+    double houseBlendBasicPrice = 2900;
+    return houseBlendBasicPrice;
   }
 };
 
