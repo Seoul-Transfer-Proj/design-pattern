@@ -1,6 +1,6 @@
 #include <iostream>
-#include "flybehavior.cpp"
-#include "quackbehavior.cpp"
+#include "flybehavior.h"
+#include "quackbehavior.h"
 
 using namespace std;
 
@@ -52,23 +52,4 @@ public:
     cout << "Looks like DecoyDuck!!" << endl;
   }
 };
-
-int main () {
-  Duck* mallardDuck = new MallardDuck();
-  mallardDuck->display();
-  mallardDuck->performFly();
-  mallardDuck->performQuack();
-  delete mallardDuck;
-
-  Duck* decoyDuck = new DecoyDuck();
-  decoyDuck->display();
-  decoyDuck->performFly();
-  decoyDuck->performQuack();
-  decoyDuck->setFlyBehavior(new FlyWithWings());
-  (*decoyDuck).performFly();
-  (*decoyDuck).setFlyBehavior(new FlyRocketPowered());
-  (*decoyDuck).performFly();
-  
-  return 0;
-}
 
