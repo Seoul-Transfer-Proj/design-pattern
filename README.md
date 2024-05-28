@@ -4,7 +4,7 @@
 
 아래 서적에서 소개하는 각 디자인 패턴들을 C++을 통해 구현해보며 이해하기 위한 레포입니다.
 
-- 참고 서적: (헤드 퍼스트 디자인 패턴)[https://m.hanbit.co.kr/store/books/book_view.html?p_code=B6113501223]
+- 참고 서적:[헤드 퍼스트 디자인 패턴](https://m.hanbit.co.kr/store/books/book_view.html?p_code=B6113501223)
 
 ## 빌드 환경
 
