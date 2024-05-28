@@ -26,9 +26,8 @@
     - g++ -std=c++11 -o adventure_game adventure_game.cpp
     - ./adventure_game
   - adventure 예제
-    - 
     - g++ -std=c++11 -o adventure adventure.cpp
-    - 
+    - ./adventure 
 - part2: 현재 디렉토리를 part2/weather_measurement로 설정 > 터미널에서 다음 명령어 입력
   - g++ -std=c++11 -o weather_station weather_station.cpp weather_data.cpp subject.cpp current_display.cpp ./displayment/forecast.cpp
   - ./weather_station 
@@ -42,3 +41,6 @@
 
 ### 관련 아티클
 
+- [C++로 전략 패턴 구현하기](https://velog.io/@changhwan77/design-pattern-1)
+- [C++로 Observer Pattern 구현해보기](https://velog.io/@changhwan77/C%EB%A1%9C-Observer-Pattern-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0)
+- [C++로 Decorating Pattern 이해하기](https://velog.io/@changhwan77/C%EB%A1%9C-Decorating-Pattern-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
