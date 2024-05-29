@@ -1,6 +1,9 @@
 #include "remote_control.h"
 #include "./command/light.h"
-#include "./command/living_room_fan.h"
+#include "./command/fan/high.h"
+#include "./command/fan/medium.h"
+#include "./command/fan/low.h"
+#include "./command/fan/living_room_fan.h"
 #include "./command/garage_door.h"
 #include "./command/stereo.h"
 
@@ -21,19 +24,32 @@ int main() {
   livingRoomLightSlot->setOffCommand(new LightOffCommand(livingRoomLight));
   remoteControl->addSlot(livingRoomLightSlot);
 
-  // 주방 전구 제어 슬롯 추가
-  KitchenLight* kitchenLight = new KitchenLight();
-  Slot* kitchenLightSlot = new Slot("kitchenLight");
-  kitchenLightSlot->setOnCommand(new LightOnCommand(kitchenLight));
-  kitchenLightSlot->setOffCommand(new LightOffCommand(kitchenLight));
-  remoteControl->addSlot(kitchenLightSlot);
-
   // 거실 선풍기 제어 슬롯 추가
   LivingRoomFan* livingRoomFan = new LivingRoomFan();
-  Slot* livingRoomFanSlot = new Slot("LivingRoomFan");
-  livingRoomFanSlot->setOnCommand(new FanHighCommand(livingRoomFan));
-  livingRoomFanSlot->setOffCommand(new FanOffCommand(livingRoomFan));
-  remoteControl->addSlot(livingRoomFanSlot);
+
+  FanOffCommand* fanOffCommand = new FanOffCommand(livingRoomFan);
+  // Slot* livingRoomFanSlot = new Slot("LivingRoomFan");
+  // livingRoomFanSlot->setOnCommand(new FanCommand(livingRoomFan));
+  // livingRoomFanSlot->setOffCommand(fanOffCommand);
+  // remoteControl->addSlot(livingRoomFanSlot);
+
+  // 선풍기 속도를 3단으로 설정.
+  Slot* fanHighSlot = new Slot("FanSpeedHigh");
+  fanHighSlot->setOnCommand(new FanHighCommand(livingRoomFan));
+  fanHighSlot->setOffCommand(fanOffCommand);
+  remoteControl->addSlot(fanHighSlot);
+
+  // 선풍기 속도를 2단으로 설정.
+  Slot* fanMediumSlot = new Slot("FanSpeedMedium");
+  fanMediumSlot->setOnCommand(new FanMediumCommand(livingRoomFan));
+  fanMediumSlot->setOffCommand(fanOffCommand);
+  remoteControl->addSlot(fanMediumSlot);
+
+  // 선풍기 속도를 1단으로 설정.
+  Slot* fanLowSlot = new Slot("FanSpeedLow");
+  fanLowSlot->setOnCommand(new FanLowCommand(livingRoomFan));
+  fanLowSlot->setOffCommand(fanOffCommand);
+  remoteControl->addSlot(fanLowSlot);
 
   // 차고 문 제어 슬롯 추가
   GarageDoor* garageDoor = new GarageDoor();
@@ -49,15 +65,21 @@ int main() {
   stereoSlot->setOffCommand(new StereoOffForCD(stereo));
   remoteControl->addSlot(stereoSlot);
 
+  // 선풍기 켜기
+  remoteControl->onCommmandexecute("FanSpeedLow");
+  // 선풍기 2단으로 설정.
+  remoteControl->onCommmandexecute("FanSpeedMedium");
+  // 선풍기 3단으로 설정.
+  remoteControl->onCommmandexecute("FanSpeedHigh");
+  // 선풍기 2단으로 돌아감.
+  remoteControl->undoCommandExecute();
+
   // 스테레오 재생
   remoteControl->onCommmandexecute("Stereo");
-  // 거실 선풍기 켜기
-  remoteControl->onCommmandexecute("LivingRoomFan");
+
   // 차고 문 열기
   remoteControl->onCommmandexecute("GarageDoor");
 
-  // 거실 선풍기 끄기
-  remoteControl->offCommmandexecute("LivingRoomFan");
-
+  
   return 0;
 };

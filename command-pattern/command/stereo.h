@@ -10,6 +10,7 @@ private:
 public:
   StereoOnForCD(Stereo* stereo) { this->stereo = stereo; }
   void execute() { stereo->onForCD(); }
+  void undo() { stereo->offForCD(); }
 };
 
 class StereoOffForCD : public Command {
@@ -18,6 +19,7 @@ private:
 public:
   StereoOffForCD(Stereo* stereo) { this->stereo = stereo; }
   void execute() { stereo->offForCD(); }
+  void undo() { stereo->onForCD(); }
 };
 
 #endif 

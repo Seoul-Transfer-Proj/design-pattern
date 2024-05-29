@@ -10,6 +10,7 @@ private:
 public:
   GarageDoorOpenCommand(GarageDoor* garageDoor) { this->garageDoor = garageDoor; }
   void execute() { this->garageDoor->up(); }
+  void undo() { garageDoor->down(); }
 };
 
 class GarageDoorCloseCommand : public Command {
@@ -18,6 +19,7 @@ private:
 public:
   GarageDoorCloseCommand(GarageDoor* garageDoor) { this->garageDoor = garageDoor; }
   void execute() { this->garageDoor->down(); }
+  void undo() { garageDoor->up(); }
 };
 
 #endif

@@ -8,6 +8,7 @@
 class RemoteControl {
 private:
   vector<Slot*> slots;
+  Command* undoCommand;
 public:
   // slot이 7개가 아니고 7개까지만 slot 추가 가능
   void addSlot(Slot* slot) {
@@ -21,6 +22,7 @@ public:
     for (auto slot : slots) {
       if (slot->getDescription() == slotDescription ) {
         slot->getOnCommand()->execute();
+        undoCommand = slot->getOnCommand();
         break;
       }
     }
@@ -31,9 +33,14 @@ public:
     for (auto slot : slots) {
       if (slot->getDescription() == slotDescription) {
         slot->getOffCommand()->execute();
+        undoCommand = slot->getOffCommand();
         break;
       }
     }
+  }
+
+  void undoCommandExecute() {
+    undoCommand->undo();
   }
 };
 
