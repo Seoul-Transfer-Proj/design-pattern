@@ -12,12 +12,16 @@ class Client {
 private:
   Command* command;
 public:
-  Client(Receiver* receiver) { createCommand(receiver); }
-
-  void createCommand(Receiver* receiver) {
-    this->command = new Command(receiver);
+  Client(Command* command) {
+    this->command = command;
     cout << "Client: 주문서 작성 완료" << endl;
   }
+
+  void setCommand(Command* command) {
+    this->command = command;
+    cout << "Client: 주문서 작성 완료" << endl;
+  }
+  
   Command* getCommand() { return command; }
 };
 
