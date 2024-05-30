@@ -1,1 +1,9 @@
-[.vscode]/
+.vscode/
+
+*.json
+*.DS_Store
+command-pattern/main
+part1/duck/duck_example
+part1/duck/hunter
+part1/duck/main
+part3_decorating_pattern/inheritance/main
