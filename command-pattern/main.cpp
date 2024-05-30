@@ -6,6 +6,7 @@
 #include "./command/fan/living_room_fan.h"
 #include "./command/garage_door.h"
 #include "./command/stereo.h"
+#include "./command/macro.h"
 
 #include "./vendor/living_room.h"
 #include "./vendor/kitchen_light.h"
@@ -19,14 +20,62 @@ int main() {
 
   // 거실 전구 제어 슬롯 추가
   LivingRoomLight* livingRoomLight = new LivingRoomLight();
+  LightOnCommand* lightOnCommand = new LightOnCommand(livingRoomLight);
+  LightOffCommand* lightOffCommand = new LightOffCommand(livingRoomLight);
+
   Slot* livingRoomLightSlot = new Slot("LivingRoomLight");
-  livingRoomLightSlot->setOnCommand(new LightOnCommand(livingRoomLight));
-  livingRoomLightSlot->setOffCommand(new LightOffCommand(livingRoomLight));
+  livingRoomLightSlot->setOnCommand(lightOnCommand);
+  livingRoomLightSlot->setOffCommand(lightOnCommand);
   remoteControl->addSlot(livingRoomLightSlot);
 
+  // 차고 문 제어 슬롯 추가
+  GarageDoor* garageDoor = new GarageDoor();
+  Slot* garageDoorSlot = new Slot("GarageDoor");
+  GarageDoorOpenCommand* garageDoorOpenCommand = new GarageDoorOpenCommand(garageDoor);
+  GarageDoorCloseCommand* garageDoorCloseCommand = new GarageDoorCloseCommand(garageDoor);
+
+  garageDoorSlot->setOnCommand(garageDoorOpenCommand);
+  garageDoorSlot->setOffCommand(garageDoorCloseCommand);
+  remoteControl->addSlot(garageDoorSlot);
+
+  // 스테레오 제어 슬롯 추가
+  Stereo* stereo = new Stereo();
+  Slot* stereoSlot = new Slot("Stereo");
+  StereoOnForCD* stereoOnForCD = new StereoOnForCD(stereo);
+  StereoOffForCD* stereoOffForCD = new StereoOffForCD(stereo);
+
+  stereoSlot->setOnCommand(stereoOnForCD);
+  stereoSlot->setOffCommand(stereoOffForCD);
+  remoteControl->addSlot(stereoSlot);
+
+  vector<Command*> onCommands;
+  onCommands.push_back(lightOnCommand);
+  onCommands.push_back(garageDoorOpenCommand);
+  onCommands.push_back(stereoOnForCD);
+
+  vector<Command*> offCommands;
+  offCommands.push_back(lightOffCommand);
+  offCommands.push_back(garageDoorCloseCommand);
+  offCommands.push_back(stereoOffForCD);
+
+  MacroCommand* macroOnCommand = new MacroCommand(onCommands);
+  MacroCommand* macroOffCommand = new MacroCommand(offCommands);
+
+  Slot* macroSlot = new Slot("Macro");
+  macroSlot->setOnCommand(macroOnCommand);
+  macroSlot->setOffCommand(macroOffCommand);
+
+  remoteControl->addSlot(macroSlot);
+
+  // macro 슬롯 on
+  remoteControl->onCommmandexecute("Macro");
+  // macro 슬롯 off
+  remoteControl->offCommmandexecute("Macro");
+
+
+// 선풍기 리모컨 작동 예제
   // 거실 선풍기 제어 슬롯 추가
   LivingRoomFan* livingRoomFan = new LivingRoomFan();
-
   FanOffCommand* fanOffCommand = new FanOffCommand(livingRoomFan);
   // Slot* livingRoomFanSlot = new Slot("LivingRoomFan");
   // livingRoomFanSlot->setOnCommand(new FanCommand(livingRoomFan));
@@ -51,20 +100,6 @@ int main() {
   fanLowSlot->setOffCommand(fanOffCommand);
   remoteControl->addSlot(fanLowSlot);
 
-  // 차고 문 제어 슬롯 추가
-  GarageDoor* garageDoor = new GarageDoor();
-  Slot* garageDoorSlot = new Slot("GarageDoor");
-  garageDoorSlot->setOnCommand(new GarageDoorOpenCommand(garageDoor));
-  garageDoorSlot->setOffCommand(new GarageDoorCloseCommand(garageDoor));
-  remoteControl->addSlot(garageDoorSlot);
-
-  // 스테레오 제어 슬롯 추가
-  Stereo* stereo = new Stereo();
-  Slot* stereoSlot = new Slot("Stereo");
-  stereoSlot->setOnCommand(new StereoOnForCD(stereo));
-  stereoSlot->setOffCommand(new StereoOffForCD(stereo));
-  remoteControl->addSlot(stereoSlot);
-
   // 선풍기 켜기
   remoteControl->onCommmandexecute("FanSpeedLow");
   // 선풍기 2단으로 설정.
@@ -74,12 +109,5 @@ int main() {
   // 선풍기 2단으로 돌아감.
   remoteControl->undoCommandExecute();
 
-  // 스테레오 재생
-  remoteControl->onCommmandexecute("Stereo");
-
-  // 차고 문 열기
-  remoteControl->onCommmandexecute("GarageDoor");
-
-  
   return 0;
 };
