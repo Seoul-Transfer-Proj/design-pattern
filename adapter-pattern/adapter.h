@@ -26,4 +26,14 @@ public:
   }
 };
 
+class ClassDuckAdapter : public Duck, Turkey {
+public:
+  void quack() {
+    gobble();
+  }
+  void fly() {
+    fly();
+  }
+};
+
 #endif
