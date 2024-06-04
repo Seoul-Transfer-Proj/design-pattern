@@ -2,10 +2,11 @@
 #define MELL_H
 
 #include "menuitem.h"
+#include "menu.h"
 #include "./iterator/dinner_menu.h"
 #include <vector>
 
-class DinnerMenu {
+class DinnerMenu : public Menu {
 private:
   const static int MAX_ITEMS = 6;
   MenuItem menuItmes[MAX_ITEMS];

@@ -3,72 +3,58 @@
 
 #include "roux.h"
 #include "mell.h"
+#include "cafe_menu.h"
+#include "menu.h"
 
 class Waitress {
 private:
-  PancakeHouseMenu panCakeHouseMenu;
-  DinnerMenu dinnerMenu;
+  vector<Menu*> menus;
 public:
-  
-  Waitress(PancakeHouseMenu panCakeHouseMenu, DinnerMenu dinnerMenu) {
-    this->panCakeHouseMenu = panCakeHouseMenu;
-    this->dinnerMenu = dinnerMenu;
-  }
+  Waitress(vector<Menu*> &menus) { this->menus = menus; }
 
   void printMenu() {
-    Iterator* panCakeIterator = panCakeHouseMenu.createIterator();
-    Iterator* dinnerIterator = dinnerMenu.createIterator();
-
-    cout << "아침 메뉴 출력" << endl;
-    printMenu(panCakeIterator);
-    cout << "점심 메뉴 출력" << endl;
-    printMenu(dinnerIterator);
-  }
-
-  void printMenu(Iterator* iterator) {
-    while(iterator->hasNext()) {
-      MenuItem menuItem = iterator->next();
+    cout << "메뉴 출력" << endl;
+    for (auto menu : menus) {
+      Iterator* menuIterator = menu->createIterator();
+      while(menuIterator->hasNext()) {
+      MenuItem menuItem = menuIterator->next();
       cout << menuItem.getName() << endl;
+      }
     }
   }
 
   void printVegetarianMenu() {
-    Iterator* panCakeIterator = panCakeHouseMenu.createIterator();
-    Iterator* dinnerIterator = dinnerMenu.createIterator();
-
-    cout << "아침 비건 메뉴 출력" << endl;
-    printVegetarianMenu(panCakeIterator);
-    cout << "점심 비건 메뉴 출력" << endl;
-    printVegetarianMenu(dinnerIterator);
-  }
-
-
-  void printVegetarianMenu(Iterator* iterator) {
-    while (iterator->hasNext())
-    {
-      MenuItem menuItem = iterator->next();
-      if (menuItem.isVegetarian()){
-        cout << menuItem.getName() << endl;
-      }
+    cout << "비건 메뉴 출력" << endl;
+    for (auto menu : menus) {
+      Iterator* menuIterator = menu->createIterator();
+      while (menuIterator->hasNext()) {
+      MenuItem menuItem = menuIterator->next();
+      if (menuItem.isVegetarian()) {
+          cout << menuItem.getName() << endl;
+        }
+      }   
     }
   }
 
-  bool isItemVegetarian(string name, Iterator* iterator) {
+  bool isItemVegetarian(string name) {
     bool isVegetarian = false;
 
-    while (iterator->hasNext())
+    for (auto menu : menus) 
     {
-      MenuItem menuItem = iterator->next();
-      if (menuItem.getName() == name ){
-        if (menuItem.isVegetarian()) {
-        cout << menuItem.getName() << endl;
-        isVegetarian = true;
-        }
+      Iterator* menuIterator = menu->createIterator();
+      while (menuIterator->hasNext())
+      {
+        MenuItem menuItem = menuIterator->next();
+        if (menuItem.getName() == name ){
+            if (menuItem.isVegetarian()) {
+            cout << menuItem.getName() << endl;
+            isVegetarian = true;
+            }
+          }
       }
     }
     return isVegetarian;
   }
-
 };
 
 #endif 

@@ -2,10 +2,11 @@
 #define ROUX_H
 
 #include "menuitem.h"
+#include "menu.h"
 #include "./iterator/pancake.h"
 #include <vector>
 
-class PancakeHouseMenu {
+class PancakeHouseMenu : public Menu {
 private:
   vector<MenuItem> menuItems;
 public:
