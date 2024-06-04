@@ -1,10 +1,11 @@
-#ifndef MENUITEM_H
-#define MENUITEM_H
+#ifndef MENUITEMCOMPONENT_H
+#define MENUITEMCOMPONENT_H
 
+#include "component.h"
 #include <iostream>
 using namespace std;
 
-class MenuItem{
+class MenuItem : public MenuComponent {
 private:
   string name;
   string description;
@@ -30,6 +31,12 @@ public:
   }
   bool isVegetarian() {
     return vegetarian;
+  }
+  void print() {
+    cout << name << endl;
+    cout << description << endl;
+    cout << price << endl;
+    cout << vegetarian << endl;
   }
 };
 
