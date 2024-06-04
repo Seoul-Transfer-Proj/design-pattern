@@ -1,7 +1,7 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
-#include "../menuitem.h"
+#include "../menu/menuitem.h"
 
 class Iterator {
 public:

@@ -3,13 +3,14 @@
 
 #include "menuitem.h"
 #include "menu.h"
-#include "./iterator/dinner_menu.h"
+#include "dessert.h"
+#include "../iterator/dinner_menu.h"
 #include <vector>
 
 class DinnerMenu : public Menu {
 private:
   const static int MAX_ITEMS = 6;
-  MenuItem menuItmes[MAX_ITEMS];
+  MenuItem menuItemes[MAX_ITEMS];
   int numberOfItems = 0;
 public:
   DinnerMenu() {
@@ -24,13 +25,13 @@ public:
     if (numberOfItems >= MAX_ITEMS) {
       cout << "죄송합니다. 메뉴가 꽉찼어요. 더 이상 메뉴를 추가할 수 없어요.";
     } else {
-      menuItmes[numberOfItems] = newMenuItem;
+      menuItemes[numberOfItems] = newMenuItem;
       numberOfItems += 1;
     }
   }
 
   Iterator* createIterator() {
-    return new DinnerMenuIterator(menuItmes, MAX_ITEMS);
+    return new DinnerMenuIterator(menuItemes, MAX_ITEMS);
   }
 };
 

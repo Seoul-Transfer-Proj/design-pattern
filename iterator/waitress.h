@@ -1,10 +1,8 @@
 #ifndef WAITRESS_H
 #define WAITRESS_H
 
-#include "roux.h"
-#include "mell.h"
-#include "cafe_menu.h"
-#include "menu.h"
+#include "./menu/menu.h"
+#include "./iterator/iterator.h"
 
 class Waitress {
 private:

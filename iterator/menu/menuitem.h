@@ -1,10 +1,11 @@
 #ifndef MENUITEM_H
 #define MENUITEM_H
 
+#include "../node.h"
 #include <iostream>
 using namespace std;
 
-class MenuItem {
+class MenuItem : public Node {
 private:
   string name;
   string description;
