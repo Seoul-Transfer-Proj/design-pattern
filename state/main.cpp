@@ -1,7 +1,15 @@
-#include "money_machine.h"
+#include "gumball_state_machine.h"
+
+#include <iostream>
+using namespace std;
+
+bool isTrue(string input) {
+  return input == "Y";
+}
 
 int main() {
   GumballStateMachine gumballStateMachine = GumballStateMachine(10);
+
   string input;
   while (gumballStateMachine.getNumberOfGumball() > 0)
   {
@@ -9,7 +17,7 @@ int main() {
   // 동전을 넣으시겠습니까? > Y가 될 때까지 반복
     while (!isInserted)
     {
-      cout << "동전을 넣으시겠습니까?(Y/N)" << endl;
+      std::cout << "동전을 넣으시겠습니까?(Y/N)" << endl;
       cin >> input;
       isInserted = isTrue(input);
     }
