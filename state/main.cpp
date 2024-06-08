@@ -1,14 +1,17 @@
-#include "gumball_state_machine.h"
-
-#include <iostream>
-using namespace std;
+#include "./state_machine/gumball_state_machine.h"
 
 bool isTrue(string input) {
   return input == "Y";
 }
 
 int main() {
-  GumballStateMachine gumballStateMachine = GumballStateMachine(10);
+  GumballStateMachine gumballStateMachine = GumballStateMachine(10, "Seoul");
+  State* noQuarterState = new NoQuarter(gumballStateMachine);
+  State* hasQuarterState = new HasQuarter(gumballStateMachine);
+  State* soldState = new Sold(gumballStateMachine);
+  State* soldOutState = new SoldOut(gumballStateMachine);
+  State* winnerState = new Winner(gumballStateMachine);
+  gumballStateMachine.setInitializeMemberState(noQuarterState, hasQuarterState, soldState, soldOutState, winnerState);
 
   string input;
   while (gumballStateMachine.getNumberOfGumball() > 0)

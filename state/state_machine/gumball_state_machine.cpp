@@ -1,24 +1,11 @@
 #include "gumball_state_machine.h"
 
-class HasQuarter;
-class NoQuarter;
-class Sold;
-class SoldOut;
-class Winner;
-
-GumballStateMachine::GumballStateMachine(int count) {
-  noQuarterState = new NoQuarter(this);
-  hasQuarterState = new HasQuarter(this);
-  soldState = new Sold(this);
-  soldOutState = new SoldOut(this);
-  winnerState = new Winner(this);
-
-  numberOfGumball = count;
-  if (count > 0) {
-    state = noQuarterState;
-  } else {
-    state = soldOutState;
-  }
+void GumballStateMachine::setInitializeMemberState(State* noQuarterState, State* hasQuarterState, State* soldState, State* soldOutState, State* winnerState) {
+  this->noQuarterState = noQuarterState;
+  this->hasQuarterState = hasQuarterState;
+  this->soldState = soldState;
+  this->soldOutState = soldOutState;
+  this->winnerState = winnerState;
 }
 
 void GumballStateMachine::insertQuarter() {
