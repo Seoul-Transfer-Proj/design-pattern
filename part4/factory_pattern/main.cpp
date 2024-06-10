@@ -1,25 +1,23 @@
-#include "pizza_store.h"
-#include "./pizza_factory/cheese.h"
-#include "./pizza_factory/chicago.h"
-#include "./pizza_factory/newyork.h"
+#include "./pizza_store/pizza_store.h"
+#include "./pizza_store/newyork.h"
+
+#include "./ingredient_factory/factory.h"
+#include "./ingredient_factory/newyork.h"
 
 #include <iostream>
 using namespace std;
 
 int main() {
   // 치즈 피자 주문하기
-  PizzaFactory* pizzaFactory = new CheesePizzaFactory();
-  PizzaStore* pizzaStore = new PizzaStore(pizzaFactory);
-  pizzaStore->orderPizza();
+  IngredientFactory* nyIngredientFactory = new NewyorkIngredientFactory();
+  PizzaStore* nyPizzaStore = new NewYorkStore(nyIngredientFactory);
+  nyPizzaStore->orderPizza("cheese");
 
   // 시카고 피자 주문
-  pizzaStore->setPizzaFactory(new ChicagoPizzaFactory());
-  pizzaStore->orderPizza();
+
 
   // 뉴욕 피자 주문
-  pizzaStore->setPizzaFactory(new NewYorkPizzaFactory());
-  pizzaStore->orderPizza();
-  delete pizzaStore;
+
 
   return 0;
 };

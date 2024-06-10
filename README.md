@@ -41,6 +41,15 @@
 
 ### 관련 아티클
 
+#### 디자인 패턴 
 - [C++로 전략 패턴 구현하기](https://velog.io/@changhwan77/design-pattern-1)
 - [C++로 Observer Pattern 구현해보기](https://velog.io/@changhwan77/C%EB%A1%9C-Observer-Pattern-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0)
 - [C++로 Decorating Pattern 이해하기](https://velog.io/@changhwan77/C%EB%A1%9C-Decorating-Pattern-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+- [C++로 템플릿 패턴 이해하기](https://velog.io/@changhwan77/C로-템플릿-패턴-이해하기)
+- [C++로 커맨드 패턴 이해하기](https://velog.io/@changhwan77/C로-커맨드-패턴-이해하기)
+- [C++로 Adapter & Facade 패턴 이해하기](https://velog.io/@changhwan77/C로-Adapter-Facade-패턴-이해하기)
+
+#### C++로 객체지향 개념 이해
+- [C++로 Polymorphism과 가상 함수 이해하기](https://velog.io/@changhwan77/C로-Polymorphism과-가상-함수-이해하기)
+- [구조체와 클래스의 차이점](https://velog.io/@changhwan77/구조체와-클래스의-차이점)
+- [객체의 생명 주기](https://velog.io/@changhwan77/동적-객체-생성)
