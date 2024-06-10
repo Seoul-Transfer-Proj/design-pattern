@@ -21,6 +21,14 @@ public:
         model->registerBPMObserver((BPMObserver*)this);
     }
 
+    void start() {
+        controller->start();
+    }
+
+    void stop() {
+        controller->stop();
+    }
+
     void createView() {
         std::cout << "Creating view..." << std::endl;
     }
@@ -45,6 +53,7 @@ public:
         std::cout << "Start menu item disabled" << std::endl;
     }
 
+// Model(Observable)로 부터 알림을 받으면 실제 값을 변경하여 UI에 반영.
     void updateBPM() override {
         if (model != nullptr) {
             int bpm = model->getBPM();
@@ -55,7 +64,6 @@ public:
             }
         }
     }
-
     void updateBeat() override {
         std::cout << "Beat updated" << std::endl;
     }
