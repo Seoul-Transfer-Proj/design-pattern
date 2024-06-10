@@ -83,7 +83,9 @@ public:
     }
 
     void registerBeatObserver(BeatObserver* o) override {
-        beatObservers.push_back(o);
+        if (std::find(beatObservers.begin(), beatObservers.end(), o) == beatObservers.end()) {
+            beatObservers.push_back(o);
+        }
     }
 
     void removeObserver(BeatObserver* o) override {
@@ -91,7 +93,9 @@ public:
     }
 
     void registerBPMObserver(BPMObserver* o) override {
-        bpmObservers.push_back(o);
+        if (std::find(bpmObservers.begin(), bpmObservers.end(), o) == bpmObservers.end()) {
+            bpmObservers.push_back(o);
+        }
     }
 
     void removeObserver(BPMObserver* o) override {
